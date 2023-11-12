@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <link rel ="icon" href="MISC/logo.png" type = "image/x-icon" /> <!--Tag per inserire il logo nella scheda -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpotifApi | Impostazioni</title>
+</head>
+
+<body>
+  <!-- Navbar laterale con i link alle varie pagine -->
+  <nav class="sidebar">
+    <div>
+      <div class="brand">
+        <span>SpotifApi</span>
+      </div>
+      <br><br>
+      <ul class="tools">
+        <li>
+          <a href="home.html">
+            <span class="material-icons-outlined">
+              search
+            </span>
+            <span>Cerca</span>
+          </a>
+        </li>
+        <li>
+          <a href="playlists.html">
+            <span class="material-icons-outlined">
+              library_music
+            </span>
+            <span>Le mie playlist</span>
+          </a>
+        </li>
+        <li>
+          <a href="groups.html">
+            <span class="material-icons-outlined">
+              groups
+            </span>
+            <span>I miei gruppi</span>
+          </a>
+        </li>
+        <li>
+          <a href="users.html">
+            <span class="material-icons-outlined">
+              people
+            </span>
+            <span>Utenti</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <span class="material-icons-outlined">
+              settings
+            </span>
+            <span>Impostazioni</span>
+          </a>
+        </li>
+      </ul>
+      <hr />
+      <div class="profile" id="profile">
+        <img class ="profile-pic" id="profile-pic" src="/SpotifApi/No_image_available.svg.png">
+        <div>
+          <h4 id="profileName"></h4>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Fine Navbar laterale con i link alle varie pagine -->
+
+  <!-- Div principale affiancato alla Navbar -->
+  <div class="content">
+    <div class="home-container">
+      <div id="buttons-div">
+        <button class="btn registration-btn" onclick="enterModifyUserView()">Modifica i tuoi dati</button>
+        <button class="btn login-btn" onclick="logOut()">Log Out</button>
+        <button class="btn login-btn" onclick="deleteUser()">Cancella il tuo account</button>
+      </div>
+
+      <!-- Div contenente il form di modifica di un utente (nascosto di default) -->
+      <div class="registration-div modify-user" id="modify-user-div">
+        <div class="logo"><img src="/MISC/logo.png"></div>
+        <div class="card">
+          <div class="input-control">
+            <p>Username</p>
+            <input type="text" name="username-registration" id="username-registration" placeholder="username"
+              onkeyup="checkUsername()">
+            <div class="error"></div>
+          </div>
+          <div class="input-control">
+            <p>Email</p>
+            <input type="text" name="e-mail-registration" id="e-mail-registration" placeholder="e-mail" disabled>
+            <div class="error"></div>
+          </div>
+          <div>
+            <p>Immagine profilo</p>
+            <input type="url" name="user-pic" id="user-pic" placeholder="Inserisci l'indirizzo di un'immagine">
+          </div>
+          <div class="input-control">
+            <p>Password</p>
+            <input type="password" name="psw-registration" id="psw-registration" placeholder="password"
+              onkeyup="checkPsw()">
+            <span class="material-icons-outlined eye-icon" onclick="toggleVisibility1()" id="eye-icon1">
+              visibility
+            </span>
+            <div class="error"></div>
+          </div>
+          <div class="input-control">
+            <p>Ripeti la password</p>
+            <input type="password" name="psw2-registration" id="psw2-registration" placeholder="repeat your password"
+              onkeyup="checkPsw2()">
+            <span class="material-icons-outlined eye-icon" onclick="toggleVisibility2()" id="eye-icon2">
+              visibility
+            </span>
+            <div class="error"></div>
+          </div>
+          <button type="submit" class="btn registration-btn" onclick="confirmModify()">CONFERMA LE MODIFICHE</button>
+          <a href="settings.html"><button class="btn login-btn">ANNULLA</button></a>
+        </div>
+      </div>
+      <!-- Fine Div contenente il form di modifica di un utente -->
+
+      <!-- Popup per creazione avvenuta con successo (nascosto di default) -->
+      <div class="modify-form-success" id="modify-form-success">
+        <div class="card">
+          <h3>Grazie <strong id="username-popup"></strong>!</h3> 
+          <h3>Le modifiche sono state applicate con successo!</h3>
+          <a href="settings.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per creazione avvenuta con successo (nascosto di default) -->
+
+
+    </div>
+  </div>
+  <!-- Fine Div principale affiancato alla navabar -->
+  <script src="js/index.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/groups.js"></script>
+  <script src="js/playlists.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+
+</html>

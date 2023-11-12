@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <link rel ="icon" href="MISC/logo.png" type = "image/x-icon" /> <!--Tag per inserire il logo nella scheda -->
+  <title>SpotifApi | Completa il tuo profilo</title>
+</head>
+
+<body>
+  <!-- Div contenente il form di inserimento dei tag -->
+  <div class="container">
+    <div class="card">
+      <div class="tag-input">
+        <h2>Preferenze musicali</h2>
+        <form id="tagForm">
+          <div class="tag-input-wrap">
+            <span class="material-icons-outlined">
+              local_offer
+            </span>
+            <input type="text" placeholder="Aggiungi un tag..." id="tagInput" maxlength="25" autocomplete="off" />
+          </div>
+          <div class="tags"></div>
+          <small>Aggiungi fino a 5 generi musicali</small>
+        </form>
+      </div>
+      <button type="button" class="btn registration-btn" id="success-btn" onclick="confirm()">CONFERMA</button>
+    </div>
+  </div>
+  <!-- Fine Div contenente il form di inserimento dei tag -->
+  
+  <script src="js/tag-input.js"></script>
+</body>
+
+</html>

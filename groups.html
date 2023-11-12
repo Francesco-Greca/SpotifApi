@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <link rel ="icon" href="MISC/logo.png" type = "image/x-icon" /> <!--Tag per inserire il logo nella scheda -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpotifApi | Gruppi</title>
+</head>
+
+<!-- Con l'onload recupero i dati dei gruppi dell'utente loggato -->
+<body onload="fillGroupsData()"> 
+
+  <!-- Navbar laterale con i link alle varie pagine -->
+  <nav class="sidebar">
+    <div>
+      <div class="brand">
+        <span>SpotifApi</span>
+      </div>
+      <br><br>
+      <ul class="tools">
+        <li>
+          <a href="home.html">
+            <span class="material-icons-outlined">
+              search
+            </span>
+            <span>Cerca</span>
+          </a>
+        </li>
+        <li>
+          <a href="playlists.html">
+            <span class="material-icons-outlined">
+              library_music
+            </span>
+            <span>Le mie playlist</span>
+          </a>
+        </li>
+        <li>
+          <a href="groups.html">
+            <span class="material-icons-outlined">
+              groups
+            </span>
+            <span>I miei gruppi</span>
+          </a>
+        </li>
+        <li>
+          <a href="users.html">
+            <span class="material-icons-outlined">
+                people
+            </span>
+            <span>Utenti</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <span class="material-icons-outlined">
+              settings
+            </span>
+            <span>Impostazioni</span>
+          </a>
+        </li>
+      </ul>
+      <hr />
+      <div class="profile" id="profile">
+        <img class ="profile-pic" id="profile-pic" src="/SpotifApi/No_image_available.svg.png">
+        <div>
+          <h4 id="profileName"></h4>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Fine Navbar laterale con i link alle varie pagine -->
+
+  <!-- Div principale affiancato alla navabar -->
+  <div class="content">
+    <div class="home-container raised-container">
+      <!-- Bottone per entrare nella modalità di ricerca dei gruppi -->
+      <button class="search-mode-button" id="search-mode-button" onclick="searchMode()">
+        <span class="material-icons-outlined">
+          search
+        </span>
+      </button>
+      <!-- Bottone per entrare nella modalità di ricerca dei gruppi -->
+
+      <!-- Div contenente la searchbar e le categorie (nascosto di default) -->
+      <div class="input-wrap input-4 group-searchbar" id="searchbar">
+        <!-- Bottone per uscire dalla modalità di ricerca dei gruppi (nascosto di default) -->
+      <button class="go-back-from-search-mode-button" id="go-back-from-search-mode-button" onclick="goBackFromSearchMode()">
+        <span class="material-icons-outlined">
+          arrow_back_ios_new
+        </span>
+      </button>
+      <!-- Bottone per uscire dalla modalità di ricerca dei gruppi -->
+        <input type="text" placeholder="Cerca gruppo..." id="search">
+        <select name="search-select" id="group-genre-search-select">
+          <option value="all">Qualsiasi genere</option>
+          <option value="compilation">Compilation</option>
+          <option value="rock">Rock</option>
+          <option value="jazz">Jazz</option>
+          <option value="lo-fi">Lo-Fi</option>
+          <option value="Rap">Rap</option>
+          <option value="trap">Trap</option>
+          <option value="classic">Classic</option>
+          <option value="folk">Folk</option>
+          <option value="love">Love</option>
+          <option value="pop">Pop</option>
+        </select>
+        <button onclick="searchGroups()">
+          <span class="material-icons-outlined">
+            search
+          </span>
+        </button>
+      </div>
+      <!-- Fine Div contenente la searchbar e le categorie -->
+
+      <!-- Div contenente i gruppi dell'utente -->
+      <div class="groups-results-container" id="groups-results-container">
+        <!-- Div contenente i gruppi creati dall'utente -->
+        <div class="user-groups" id="user-groups">
+          <h2 class="groups-header">I tuoi gruppi</h2>
+          <div class="user-groups-element create-user-group" id="user-groups-element" onclick="createUserGroup()">
+            <img class="user-groups-pic" src="MISC/plus.png">
+            <span class="user-groups-span">Crea un nuovo gruppo...</span>
+          </div>
+        </div>
+        <!-- Fine Div contenente i gruppi creati dall'utente -->
+
+        <!-- Div contenente i gruppi seguiti dall'utente -->
+        <div class="user-subscribed-groups" id="user-subscribed-groups">
+          <h2 class="groups-header">I gruppi a cui sei iscritto</h2>
+        </div>
+        <!-- Fine Div contenente i gruppi seguiti dall'utente -->
+      </div>
+      <!-- Fine Div contenente i gruppi dell'utente -->
+
+      <!-- Form per la creazione di un gruppo (nascosto di default) -->
+      <div class="card create-group-form" id="create-group-form">
+        <p>Nome del gruppo</p>
+        <input type="text" name="group-name" id="group-name" placeholder="Inserisci il nome del gruppo...">
+        <p>Immagine del gruppo</p>
+        <input type="url" name="image-url" id="image-url" placeholder="Inserisci un'immagine da Unsplash.com...">
+        <p>Genere</p>
+        <select name="group-genre-select-form" id="group-genre-select-form">
+          <option value="compilation">Compilation</option>
+          <option value="rock">Rock</option>
+          <option value="jazz">Jazz</option>
+          <option value="lo-fi">Lo-Fi</option>
+          <option value="Rap">Rap</option>
+          <option value="trap">Trap</option>
+          <option value="classic">Classic</option>
+          <option value="folk">Folk</option>
+          <option value="love">Love</option>
+          <option value="pop">Pop</option>
+        </select>
+        <button type="submit" class="btn login-btn" onclick="insertNewGroup()">CREA IL TUO NUOVO GRUPPO</button>
+      </div>
+      <!-- Fine Form per la creazione di un gruppo -->
+      
+      <!-- Popup per creazione avvenuta con successo (nascosto di default) -->
+      <div class="group-form-success" id="group-form-success">
+        <div class="card">
+          <h3>Grazie <strong id="username-popup"></strong>!</h3> 
+          <h3>Il tuo nuovo gruppo <strong id="group-name-popup"></strong> è stato creato con successo!</h3>
+          <a href="groups.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per creazione avvenuta con successo (nascosto di default) -->
+
+      <!-- Popup per errore nella creazione del gruppo (nascosto di default) -->
+      <div class="group-form-error" id="group-form-success">
+        <div class="card">
+          <h3>OPS!</h3>
+          <p id="error-message"></p>
+          <a href="groups.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per errore nella creazione del gruppo -->
+
+      <!-- Popup per sottoscrizione avvenuta con successo (nascosto di default) -->
+      <div class="group-subscribe-success" id="group-subscribe-success">
+        <div class="card">
+          <h3>Grazie <strong id="username-popup-subscribe"></strong>!</h3> 
+          <h3>Ti sei iscritto correttamente a <strong id="group-name-popup-subscribe"></strong>!</h3>
+          <a href="groups.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per sottoscrizione avvenuta con successo (nascosto di default) -->
+
+      <!-- Popup per disicrizione avvenuta con successo (nascosto di default) -->
+      <div class="group-reject-subscription-success" id="group-reject-subscription-success">
+        <div class="card">
+          <h3>Grazie <strong id="username-popup-reject-subscription"></strong>!</h3> 
+          <h3>Ti sei disiscritto correttamente a <strong id="group-name-popup-reject-subscription"></strong>!</h3>
+          <a href="groups.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per disiscrizione avvenuta con successo (nascosto di default) -->
+
+      <!-- Popup per errore nella sottoscrizione del gruppo (nascosto di default) -->
+      <div class="error-popup-subscribe" id="error-popup-subscribe">
+        <div class="card">
+          <h3>OPS!</h3>
+          <p id="error-message-subscribe"></p>
+          <a href="groups.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per errore nella sottoscrizione del gruppo -->
+
+      <!-- Div per i risultati della ricerca di gruppi (nascosto di default)-->
+      <div class="search-groups results" id="search-groups-results">
+
+      </div>
+      <!-- Div per i risultati della ricerca di gruppi -->
+
+      <!-- Div per la visualizzazione del gruppo (nascosto di default)-->
+      <div class="group-view" id="group-view">
+
+      </div>
+      <!-- Div per i risultati della ricerca di gruppi -->
+
+      <!-- Div per la visualizzazione delle playlist (nascosto di default)-->
+      <div class="view-playlist-container results" id="view-playlist-container">
+
+      </div>
+      <!-- Div per la visualizzazione delle playlist -->
+
+      <!-- Popup per aggiunta avvenuta con successo (nascosto di default) -->
+      <div class="playlist-add-success" id="playlist-add-success">
+        <div class="card">
+          <h3>La playlist <span class="pink-text" id="playlist-name-popup-add-success"></span> è stata aggiunta con successo alla playlist che segui!</h3>
+          <a href="playlists.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per modifica avvenuta con successo (nascosto di default) -->
+
+      <!-- Popup per rimozione avvenuta con successo (nascosto di default) -->
+      <div class="playlist-remove-success" id="playlist-remove-success">
+        <div class="card">
+          <h3>La playlist <span class="pink-text" id="playlist-name-popup-remove-success"></span> è stata rimossa con successo dalle playlist che segui!</h3>
+          <a href="playlists.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per modifica avvenuta con successo (nascosto di default) -->
+
+      <!-- Form per la modifica di una playlist (nascosto di default) -->
+      <div class="card modify-playlist-form" id="modify-playlist-form">
+
+        <p>Nome della playlist</p>
+        <input type="text" name="playlist-name-modify-form" id="playlist-name-modify-form">
+        <p>Immagine della playlist</p>
+        <input type="url" name="image-url-modify-form" id="image-url-modify-form">
+        <p>Privacy</p>
+        <select name="playlist-privacy-modify-form" id="playlist-privacy-modify-form">
+          <option value="private">Privata</option>
+          <option value="public">Pubblica</option>
+        </select>
+        <p>Genere</p>
+        <select name="playlist-genre-select-modify-form" id="playlist-genre-select-modify-form">
+          <option value="compilation">Compilation</option>
+          <option value="rock">Rock</option>
+          <option value="jazz">Jazz</option>
+          <option value="lo-fi">Lo-Fi</option>
+          <option value="Rap">Rap</option>
+          <option value="trap">Trap</option>
+          <option value="classic">Classic</option>
+          <option value="folk">Folk</option>
+          <option value="love">Love</option>
+          <option value="pop">Pop</option>
+        </select>
+        <button type='submit' class='btn login-btn' id='modify-playlist-btn'>MODIFICA LA TUA PLAYLIST</button>
+        <button class="btn registration-btn" id="delete-playlist">ELIMINA LA PLAYLIST</button>
+      </div>
+      <!-- Fine Form per la modifica di una playlist -->
+
+      <!-- Popup per modifica avvenuta con successo (nascosto di default) -->
+      <div class="playlist-modify-success" id="playlist-modify-success">
+        <div class="card">
+          <h3>Grazie <strong id="username-popup-modify-success"></strong>!</h3>
+          <h3>La tua playlist <strong id="playlist-name-popup-modify-success"></strong> è stata modificata con successo!</h3>
+          <a href="playlists.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per modifica avvenuta con successo (nascosto di default) -->
+
+      <!-- Popup per conferma rimozione canzone da playlist (nascosto di default) -->
+      <div class="card track-remove-confirm" id="track-remove-confirm">
+          <h3>Confermi di voler eliminare <span class="pink-text" id="track-to-delete-name-confirm"></span> di <span class="pink-text" id="track-artist-to-delete-name-confirm"></span> dalla tua playlist?</h3>
+          <button type="button" class="btn registration-btn" id="confirm-delete-track-btn">ELIMINA</button>
+          <a href="playlists.html"><button type="button" class="btn login-btn" id="success-btn">ANNULLA</button></a>
+      </div>
+      <!-- Fine Popup per modifica avvenuta con successo (nascosto di default) -->
+    </div>
+  </div>
+  <!-- Fine Div principale affiancato alla navabar -->
+  
+  <script src="js/home.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/playlists.js"></script>
+  <script src="js/groups.js"></script>
+</body>
+
+</html>

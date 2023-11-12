@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel ="icon" href="MISC/logo.png" type = "image/x-icon" /> <!--Tag per inserire il logo nella scheda -->
+  <title>SpotifApi | Login</title>
+</head>
+
+<body>
+
+  <!-- Div contenente il form di login -->
+  <div class="container login-div" id="login-div">
+    <div class="logo"><img src="MISC/logo.png"></div>
+    <div class="card">
+      <p>Indirizzo e-mail</p>
+      <input type="email" name="e-mail" id="e-mail-login" placeholder="e-mail">
+      <p>Password</p>
+      <input type="password" name="psw" id="psw-login" placeholder="password">
+      <button type="submit" class="btn login-btn" onclick="login()">ACCEDI</button>
+      <h3>Non hai un account?</h3>
+      <button class="btn registration-btn" onclick="cardRegistrazione()">ISCRIVITI A SPOTIFAPI</button>
+      <br><br>
+    </div>
+  </div>
+  <!-- Fine Div contenente il form di login -->
+
+  <!-- Div contenente il popup di errore nel login da mostrare se vengono inserite credenziali sbagliate -->
+  <div class="container login-error" id="login-error">
+    <div class="logo"><img src="MISC/logo.png"></div>
+    <div class="card">
+      <h3>Attenzione!</h3> 
+      <p>Username o password errati!</p>
+      <button type="button" class="btn login-btn" onclick="cardLogin()">ACCEDI</button>
+    </div>
+  </div>
+  <!-- Fine Div contenente il popup di errore nel login -->
+
+  <!-- Div contenente il form di registrazione per un nuovo utente da mostrare se l'utente preme sul bottone ISCRIVITI A SPOTIFAPI (nascosto di default) -->
+  <div class="container registration-div" id="registration-div">
+    <div class="logo"><img src="MISC/logo.png"></div>
+    <div class="card">
+      <div class="input-control">
+        <p>Username</p>
+        <input type="text" name="username-registration" id="username-registration" placeholder="username" onkeyup="checkUsername()">
+        <div class="error"></div>
+      </div>
+      <div class="input-control">
+        <p>Email</p>
+        <input type="text" name="e-mail-registration" id="e-mail-registration" placeholder="e-mail" onkeyup="checkEmail()">
+        <div class="error"></div>
+      </div>
+      <div>
+        <p>Immagine profilo</p>
+        <input type="url" name="user-pic" id="user-pic" placeholder="Inserisci l'indirizzo di un'immagine">
+      </div>
+      <div class="input-control">
+        <p>Password</p>
+        <input type="password" name="psw-registration" id="psw-registration" placeholder="password" onkeyup="checkPsw()">
+        <div class="error"></div>
+      </div>
+      <div class="input-control">
+        <p>Ripeti la password</p>
+        <input type="password" name="psw2-registration" id="psw2-registration" placeholder="repeat your password" onkeyup="checkPsw2()">
+        <div class="error"></div>
+      </div>
+      <button type="submit" class="btn registration-btn" onclick="validation()">REGISTRATI</button>
+      <h3>Hai già un account?</h3>
+      <button type="submit" class="btn login-btn" onclick="cardLogin()">ACCEDI</button>
+    </div>
+  </div>
+  <!-- Fine Div contenente il form di registrazione per un nuovo utente da mostrare se l'utente preme sul bottone ISCRIVITI A SPOTIFAPI (nascosto di default) -->
+
+  <!-- Div contenente il popup da mostrare quando la registrazione avviene con successo (nascosto di default). Il pulsante OK manda alla pagina last-steps.html in cui l'utente finalizza la registrazione inserendo i tag -->
+  <div class="container registration-success" id="registration-success">
+    <div class="logo"><img src="MISC/logo.png"></div>
+    <div class="card">
+      <h3>Benvenuto/a <strong id="username-popup"></strong>!</h3> 
+      <h3>Il processo di registrazione è andato a buon fine!</h3>
+      <a href="last-steps.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+    </div>
+  </div>
+  <!-- Fine Div contenente il popup da mostrare quando la registrazione avviene con successo -->
+
+  <!-- Div contenente il popup di errore da mostrare quando viene rilevato un utente già registrato con la mail inserita nel form di registrazione -->
+  <div class="container registration-error" id="registration-error">
+    <div class="logo"><img src="MISC/logo.png"></div>
+    <div class="card">
+      <h3>Attenzione!</h3> 
+      <p>Un utente con questa mail è già registrato</p>
+      <button type="button" class="btn login-btn" onclick="cardLogin()">ACCEDI</button>
+    </div>
+  </div>
+  <!-- Fine Div contenente il popup di errore -->
+
+  <script src="js/index.js"></script>
+</body>
+
+</html>

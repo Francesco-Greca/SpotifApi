@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <link rel ="icon" href="MISC/logo.png" type = "image/x-icon" /> <!--Tag per inserire il logo nella scheda -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpotifApi | Home</title>
+</head>
+
+<body>
+  <!-- Navbar laterale con i link alle varie pagine -->
+  <nav class="sidebar">
+    <div>
+      <div class="brand">
+        <span>SpotifApi</span>
+      </div>
+      <br><br>
+      <ul class="tools">
+        <li>
+          <a href="home.html">
+            <span class="material-icons-outlined">
+              search
+            </span>
+            <span>Cerca</span>
+          </a>
+        </li>
+        <li>
+          <a href="playlists.html">
+            <span class="material-icons-outlined">
+              library_music
+            </span>
+            <span>Le mie playlist</span>
+          </a>
+        </li>
+        <li>
+          <a href="groups.html">
+            <span class="material-icons-outlined">
+              groups
+            </span>
+            <span>I miei gruppi</span>
+          </a>
+        </li>
+        <li>
+          <a href="users.html">
+            <span class="material-icons-outlined">
+                people
+            </span>
+            <span>Utenti</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <span class="material-icons-outlined">
+              settings
+            </span>
+            <span>Impostazioni</span>
+          </a>
+        </li>
+      </ul>
+      <hr />
+      <div class="profile" id="profile">
+        <img class ="profile-pic" id="profile-pic" src="/SpotifApi/No_image_available.svg.png">
+        <div>
+          <h4 id="profileName"></h4>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Fine Navbar laterale con i link alle varie pagine -->
+
+  <!-- Div principale affiancato alla Navbar -->
+  <div class="content">
+    <div class="home-container">
+
+      <!-- Div contenente la searchbar e le categorie -->
+      <div class="input-wrap input-4" id="searchbar">
+        <input type="text" placeholder="Cerca..." id="search" onkeyup="searchBar()">
+        <select name="search-select" id="categories">
+          <option value="track">Canzoni</option>
+          <option value="album">Album</option>
+          <option value="artist">Artista</option>
+        </select>
+        <button>
+          <span class="material-icons-outlined">
+            search
+          </span>
+        </button>
+      </div>
+      <!-- Fine Div contenente la searchbar e le categorie -->
+
+      <!-- Div predisposto a contenere i risultati della ricerca -->
+      <div class="results-container" id="results-container">
+        <table class="results" id="results"></table>
+      </div>
+      <!-- Fine Div predisposto a contenere i risultati della ricerca -->
+
+      <!-- Div predisposto a contenere i bottoni Precedente e Successivo -->
+      <div id="next-previous-buttons"></div>
+      <!-- Fine Div predisposto a contenere i bottoni Precedente e Successivo -->
+
+      <!-- Div predisposto a contenere la vista dell'artista in cui vengono mostrati i suoi album (nascosto di default) -->
+      <div class="artist-view" id="artist-view"></div>
+      <!-- Fine Div predisposto a contenere la vista dell'artista -->
+
+      <!-- Div predisposto a contenere la vista dell'album in cui vengono mostrate le canzoni contenute (nascosto di default) -->
+      <div class="album-view" id="album-view"></div>
+      <!-- Fine Div predisposto a contenere la vista dell'album -->
+
+      <!-- Div predisposto a contenere il menu per aggiungere una canzone ad una playlist (nascosto di default) -->
+      <div class="card add-song-menu" id="add-song-menu">
+
+      </div>
+      <!-- Fine Div predisposto a contenere il menu per aggiungere una canzone ad una playlist -->
+
+      <!-- Popup per creazione avvenuta con successo (nascosto di default) -->
+      <div class="card add-song-success" id="add-song-success">
+        
+          <h3>Grazie <strong id="username-popup"></strong>!</h3> 
+          <h3><strong id="track-name-popup"></strong> è stata aggiunta con successo alla playlist <strong id="playlist-name-popup"></strong></h3>
+          <a href="home.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        
+      </div>
+      <!-- Fine Popup per creazione avvenuta con successo (nascosto di default) -->
+    </div>
+  </div>
+  <!-- Fine Div principale affiancato alla navabar -->
+  <script src="js/home.js"></script>
+  <script src="js/groups.js"></script>
+  <script src="js/playlists.js"></script>
+</body>
+
+</html>

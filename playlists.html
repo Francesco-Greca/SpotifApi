@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <link rel ="icon" href="MISC/logo.png" type = "image/x-icon" /> <!--Tag per inserire il logo nella scheda -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpotifApi | Playlists</title>
+</head>
+
+<!-- Con l'onload recupero i dati delle playlist dell'utente loggato -->
+
+<body onload="fillPlaylistData()">
+
+  <!-- Navbar laterale con i link alle varie pagine -->
+  <nav class="sidebar">
+    <div>
+      <div class="brand">
+        <span>SpotifApi</span>
+      </div>
+      <br><br>
+      <ul class="tools">
+        <li>
+          <a href="home.html">
+            <span class="material-icons-outlined">
+              search
+            </span>
+            <span>Cerca</span>
+          </a>
+        </li>
+        <li>
+          <a href="playlists.html">
+            <span class="material-icons-outlined">
+              library_music
+            </span>
+            <span>Le mie playlist</span>
+          </a>
+        </li>
+        <li>
+          <a href="groups.html">
+            <span class="material-icons-outlined">
+              groups
+            </span>
+            <span>I miei gruppi</span>
+          </a>
+        </li>
+        <li>
+          <a href="users.html">
+            <span class="material-icons-outlined">
+                people
+            </span>
+            <span>Utenti</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <span class="material-icons-outlined">
+              settings
+            </span>
+            <span>Impostazioni</span>
+          </a>
+        </li>
+      </ul>
+      <hr />
+      <div class="profile" id="profile">
+        <img class ="profile-pic" id="profile-pic" src="/SpotifApi/No_image_available.svg.png">
+        <div>
+          <h4 id="profileName"></h4>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Fine Navbar laterale con i link alle varie pagine -->
+
+  <!-- Div principale affiancato alla navabar -->
+  <div class="content">
+    <div class="home-container raised-container">
+
+      <!-- Bottone per entrare nella modalità di ricerca delle playlist -->
+      <button class="search-mode-button" id="search-mode-button" onclick="searchMode()">
+        <span class="material-icons-outlined">
+          search
+        </span>
+      </button>
+      <!-- Bottone per entrare nella modalità di ricerca delle playlist -->
+
+      <!-- Div contenente la searchbar e le categorie (nascosto di default) -->
+      <div class="input-wrap input-4 playlist-searchbar" id="searchbar">
+        <!-- Bottone per uscire dalla modalità di ricerca dei gruppi (nascosto di default) -->
+        <button class="go-back-from-search-mode-button" id="go-back-from-search-mode-button"
+          onclick="goBackFromSearchMode()">
+          <span class="material-icons-outlined">
+            arrow_back_ios_new
+          </span>
+        </button>
+        <!-- Bottone per uscire dalla modalità di ricerca delle playlist -->
+        <input type="text" placeholder="Cerca playlist..." id="search">
+        <select name="search-select" id="playlist-genre-search-select">
+          <option value="all">Qualsiasi genere</option>
+          <option value="compilation">Compilation</option>
+          <option value="rock">Rock</option>
+          <option value="jazz">Jazz</option>
+          <option value="lo-fi">Lo-Fi</option>
+          <option value="Rap">Rap</option>
+          <option value="trap">Trap</option>
+          <option value="classic">Classic</option>
+          <option value="folk">Folk</option>
+          <option value="love">Love</option>
+          <option value="pop">Pop</option>
+        </select>
+        <button onclick="searchPlaylists()">
+          <span class="material-icons-outlined">
+            search
+          </span>
+        </button>
+      </div>
+      <!-- Fine Div contenente la searchbar e le categorie -->
+
+      <!-- Div contenente le playlist -->
+      <div class="playlist-results-container" id="playlist-results-container">
+        <!-- Div contenente le playlists create dall'utente -->
+        <div class="user-playlists" id="user-playlists">
+          <h2 class="playlists-header">Le tue playlists</h2>
+          <div class="user-playlists-element create-user-playlists" id="user-playlists-element"
+            onclick="createUserPlaylist()">
+            <img class="user-playlists-pic" src="MISC/plus.png"><br>
+            <span class="user-playlists-span">Crea una nuova playlist...</span>
+          </div>
+        </div>
+        <!-- Fine Div contenente le playlists create dall'utente -->
+        <!-- Div contenente le playlists seguite dall'utente -->
+        <div class="user-playlists" id="user-playlists">
+          <h2 class="playlists-header">Le playlists che segui</h2>
+          <div class="followed-playlists-element" id="followed-playlists-element">
+
+          </div>
+        </div>
+        <!-- Fine Div contenente le playlists create dall'utente -->
+      </div>
+      <!-- Fine Div contenente le playlists dell'utente -->
+
+      <!-- Form per la creazione di una playlist (nascosto di default) -->
+      <div class="card create-playlist-form" id="create-playlist-form">
+        <p>Nome della playlist</p>
+        <input type="text" name="playlist-name" id="playlist-name" placeholder="Inserisci il nome della playlist...">
+        <p>Immagine della playlist</p>
+        <input type="url" name="image-url" id="image-url" placeholder="Inserisci un'immagine da Unsplash.com...">
+        <p>Privacy</p>
+        <select name="playlist-privacy-select-form" id="playlist-privacy-select-form">
+          <option value="private">Privata</option>
+          <option value="public">Pubblica</option>
+        </select>
+        <p>Genere</p>
+        <select name="playlist-genre-select-form" id="playlist-genre-select-form">
+          <option value="all">Qualsiasi genere</option>
+          <option value="compilation">Compilation</option>
+          <option value="rock">Rock</option>
+          <option value="jazz">Jazz</option>
+          <option value="lo-fi">Lo-Fi</option>
+          <option value="Rap">Rap</option>
+          <option value="trap">Trap</option>
+          <option value="classic">Classic</option>
+          <option value="folk">Folk</option>
+          <option value="love">Love</option>
+          <option value="pop">Pop</option>
+        </select>
+        <button type="submit" class="btn login-btn" onclick="insertNewPlaylist()">CREA LA TUA NUOVA PLAYLIST</button>
+      </div>
+      <!-- Fine Form per la creazione di una playlist -->
+
+      <!-- Popup per creazione avvenuta con successo (nascosto di default) -->
+      <div class="playlist-form-success" id="playlist-form-success">
+        <div class="card">
+          <h3>Grazie <strong id="username-popup"></strong>!</h3>
+          <h3>La tua nuova playlist <strong id="playlist-name-popup"></strong> è stata creata con successo!</h3>
+          <a href="playlists.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per creazione avvenuta con successo (nascosto di default) -->
+
+      <!-- Div per i risultati della ricerca delle playlist (nascosto di default)-->
+      <div class="search-playlist results" id="search-playlist-results">
+
+      </div>
+      <!-- Div per i risultati della ricerca delle playlist -->
+
+      <!-- Div per la visualizzazione delle playlist (nascosto di default)-->
+      <div class="view-playlist-container results" id="view-playlist-container">
+
+      </div>
+      <!-- Div per la visualizzazione delle playlist -->
+
+      <!-- Form per la modifica di una playlist (nascosto di default) -->
+      <div class="card modify-playlist-form" id="modify-playlist-form">
+
+        <p>Nome della playlist</p>
+        <input type="text" name="playlist-name-modify-form" id="playlist-name-modify-form">
+        <p>Immagine della playlist</p>
+        <input type="url" name="image-url-modify-form" id="image-url-modify-form">
+        <p>Privacy</p>
+        <select name="playlist-privacy-modify-form" id="playlist-privacy-modify-form">
+          <option value="private">Privata</option>
+          <option value="public">Pubblica</option>
+        </select>
+        <p>Genere</p>
+        <select name="playlist-genre-select-modify-form" id="playlist-genre-select-modify-form">
+          <option value="compilation">Compilation</option>
+          <option value="rock">Rock</option>
+          <option value="jazz">Jazz</option>
+          <option value="lo-fi">Lo-Fi</option>
+          <option value="Rap">Rap</option>
+          <option value="trap">Trap</option>
+          <option value="classic">Classic</option>
+          <option value="folk">Folk</option>
+          <option value="love">Love</option>
+          <option value="pop">Pop</option>
+        </select>
+        <button type='submit' class='btn login-btn' id='modify-playlist-btn'>MODIFICA LA TUA PLAYLIST</button>
+        <button class="btn registration-btn" id="delete-playlist">ELIMINA LA PLAYLIST</button>
+      </div>
+      <!-- Fine Form per la modifica di una playlist -->
+
+      <!-- Popup per modifica avvenuta con successo (nascosto di default) -->
+      <div class="playlist-modify-success" id="playlist-modify-success">
+        <div class="card">
+          <h3>Grazie <strong id="username-popup-modify-success"></strong>!</h3>
+          <h3>La tua playlist <strong id="playlist-name-popup-modify-success"></strong> è stata modificata con successo!</h3>
+          <a href="playlists.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per modifica avvenuta con successo (nascosto di default) -->
+
+      <!-- Popup per errore nella creazione della playlist (nascosto di default) -->
+      <div class="playlist-form-error" id="playlist-form-error">
+        <div class="card">
+          <h3>OPS!</h3>
+          <p id="error-message"></p>
+          <a href="playlists.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per errore nella creazione della playlist -->
+
+      <!-- Popup per aggiunta avvenuta con successo (nascosto di default) -->
+      <div class="playlist-add-success" id="playlist-add-success">
+        <div class="card">
+          <h3>La playlist <span class="pink-text" id="playlist-name-popup-add-success"></span> è stata aggiunta con successo alla playlist che segui!</h3>
+          <a href="playlists.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per modifica avvenuta con successo (nascosto di default) -->
+
+      <!-- Popup per rimozione avvenuta con successo (nascosto di default) -->
+      <div class="playlist-remove-success" id="playlist-remove-success">
+        <div class="card">
+          <h3>La playlist <span class="pink-text" id="playlist-name-popup-remove-success"></span> è stata rimossa con successo dalle playlist che segui!</h3>
+          <a href="playlists.html"><button type="button" class="btn registration-btn" id="success-btn">OK</button></a>
+        </div>
+      </div>
+      <!-- Fine Popup per modifica avvenuta con successo (nascosto di default) -->
+
+      <!-- Popup per conferma rimozione canzone da playlist (nascosto di default) -->
+      <div class="card track-remove-confirm" id="track-remove-confirm">
+          <h3>Confermi di voler eliminare <span class="pink-text" id="track-to-delete-name-confirm"></span> di <span class="pink-text" id="track-artist-to-delete-name-confirm"></span> dalla tua playlist?</h3>
+          <button type="button" class="btn registration-btn" id="confirm-delete-track-btn">ELIMINA</button>
+          <a href="playlists.html"><button type="button" class="btn login-btn" id="success-btn">ANNULLA</button></a>
+      </div>
+      <!-- Fine Popup per modifica avvenuta con successo (nascosto di default) -->
+    </div>
+  </div>
+  <!-- Fine Div principale affiancato alla navabar -->
+
+  <script src="js/home.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/groups.js"></script>
+  <script src="js/playlists.js"></script>
+</body>
+
+</html>
