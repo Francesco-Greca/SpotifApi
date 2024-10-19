@@ -78,7 +78,7 @@ spotifyApi.searchTracks('Bohemian Rhapsody').then(data => {
 - **User Profile**: `/me`
 - **User Playlists**: `/me/playlists`
 
-You can find more detailed examples and usage in the [documentation](./docs).
+You can find more detailed examples and usage in the [documentation](./Documentazione SpotifApi.pdf).
 
 ## Contributing
 
