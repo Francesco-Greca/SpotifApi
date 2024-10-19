@@ -96,10 +96,3 @@ We welcome contributions! Please feel free to submit pull requests or open issue
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 """
-
-# Saving it to a file
-file_path = '/mnt/data/README.md'
-with open(file_path, 'w') as file:
-    file.write(readme_content)
-
-file_path
