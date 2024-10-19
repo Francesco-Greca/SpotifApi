@@ -1,5 +1,3 @@
-# Creating the README.md file for SpotifApi repository
-readme_content = """
 # SpotifApi
 
 SpotifApi is a lightweight and easy-to-use wrapper for the Spotify Web API. With this API wrapper, you can easily access Spotify's rich collection of music data, including searching for tracks, albums, artists, and more, as well as managing user playlists, and interacting with user profiles.
